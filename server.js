@@ -38,6 +38,7 @@ function questions() {
                 'Add a Department',
                 'Add a Role',
                 'Update a Role',
+                'Change Manager',
                 'Done']
     }
   ])
@@ -60,6 +61,8 @@ function questions() {
       addARole()
     } else if (answer.mainQuestion === 'Update a Role') {
       updateARole()
+    } else if (answer.mainQuestion === 'Change Manager') {
+      changeManager()
     } else {
       db.end()
     };
@@ -83,7 +86,7 @@ function viewAllEmployees() {
 };
 
 function viewAllManagers() {
-  db.query('SELECT * FROM employee WHERE id = 1', (err, res) => {
+  db.query('SELECT * FROM employee WHERE id = 1 or id = 2', (err, res) => {
     if (err) throw err;
     console.table(res)
     questions()
@@ -210,17 +213,17 @@ function addARole() {
 
 function updateARole() {
   db.query('SELECT * FROM employee', (err, data) => {
-    var emp = data.map(({id, first_name}) => ({id: id, name: first_name}))
+    var employees = data.map(({id, first_name}) => ({id: id, name: first_name}))
 
     db.query('SELECT * FROM role', (err, roleData) => {
-      var roleID = roleData.map(items => items.id)
+      var roleID = roleData.map(items => items.title)
 
       inquirer.prompt([
         {
           name: 'employee',
           type: 'list',
           message: 'Select an employee to update',
-          choices: emp
+          choices: employees
         },
         {
           name: 'role',
@@ -230,12 +233,50 @@ function updateARole() {
         },
       ])
       .then(answer => {
-        db.query(`SELECT * FROM employee WHERE first_name = '${answer.employee}';`, (err, data) => {
+        db.query(`SELECT * FROM employee WHERE first_name = '${answer.employees}';`, (err, data) => {
           var id = data.map(item => item.id)
-          console.log(id[0]);
           db.query('UPDATE employee SET ? WHERE ?', [
             {
               role_id: answer.role
+            },
+            {
+              id: id[0]
+            }
+          ])
+          questions()
+        });
+      });
+    });
+  });
+};
+
+function changeManager() {
+  db.query('SELECT * FROM employee', (err, data) => {
+    var employees = data.map(({id, first_name}) => ({id: id, name: first_name}))
+
+    db.query('SELECT * FROM employee WHERE id = 1 or id = 2', (err, managerData) => {
+      var managerID = managerData.map(items => items.first_name + ' ' + items.first_name)
+
+      inquirer.prompt([
+        {
+          name: 'employee',
+          type: 'list',
+          message: 'Select an employee to update',
+          choices: employees
+        },
+        {
+          name: 'manager_id',
+          type: 'list',
+          message: 'Select a new manager for your employee.',
+          choices: managerID
+        },
+      ])
+      .then(answer => {
+        db.query(`SELECT * FROM employee WHERE manager_id = '${answer.employees}';`, (err, data) => {
+          var id = data.map(item => item.id)
+          db.query('UPDATE employee SET ? WHERE ?', [
+            {
+              manager_id: answer.manager_id
             },
             {
               id: id[0]

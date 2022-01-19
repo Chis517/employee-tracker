@@ -13,7 +13,7 @@ CREATE TABLE role (
   title VARCHAR(100) NOT NULL,
   salary INT NOT NULL,
   department_id INT NOT NULL,
-  FOREIGN KEY (department_id) REFERENCES department(id)
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 CREATE TABLE employee (
@@ -21,7 +21,7 @@ CREATE TABLE employee (
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
   role_id INT,
-  FOREIGN KEY (role_id) REFERENCES role(id),
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id),
   manager_id INT,
-  FOREIGN KEY (manager_id) REFERENCES employee(id)
+  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
