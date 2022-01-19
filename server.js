@@ -255,7 +255,7 @@ function changeManager() {
     var employees = data.map(({id, first_name}) => ({id: id, name: first_name}))
 
     db.query('SELECT * FROM employee WHERE id = 1 or id = 2', (err, managerData) => {
-      var managerID = managerData.map(items => items.first_name + ' ' + items.first_name)
+      var managerID = managerData.map(items => items.first_name + ' ' + items.last_name)
 
       inquirer.prompt([
         {

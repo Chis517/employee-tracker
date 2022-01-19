@@ -23,8 +23,10 @@ Within the db folder, change the user and password values in the connection.js f
 After npm installation is complete, run mysql in the command line and enter the following:
   * source db/db.sql
   * source db/schema.sql
-  <!-- Only source the seeds file below for reference -->
+  Only source the seeds file below for reference
   * source db/seeds.sql 
+
+After you source the sql files needed, run npm start in the command line to start the application. 
 
 
 ## Technologies
@@ -42,4 +44,4 @@ After npm installation is complete, run mysql in the command line and enter the 
 (https://github.com/Chis517/employee-tracker)
 
 * [URL of video demo]
-()
+(https://watch.screencastify.com/v/z1zbldsA07l5T2ZoyIOL)
