@@ -124,13 +124,13 @@ function addAnEmployee() {
     {
       name: 'role_id',
       type: 'input', 
-      message: "What is the employee's role ID? "
+      message: "What is the employee's role ID?"
     },
     {
       name: 'manager_id',
       type: 'input', 
-      message: "What is the employee's manager's ID? "
-    },      
+      message: "What is the employee's manager's ID?"
+    }      
   ])
   .then(function (response) {  
     db.query(
@@ -138,8 +138,8 @@ function addAnEmployee() {
         {
           first_name: response.first_name,
           last_name: response.last_name,
-          manager_id: response.manager_id,
           role_id: response.role_id,
+          manager_id: response.manager_id
         },
         function (err) {
           if (err) throw err;

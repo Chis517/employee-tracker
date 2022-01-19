@@ -2,27 +2,44 @@
 
 ## Description
 
-This Node.js command-line application takes in information of employees on a software engineering team and generates an HTML webpage that displays summaries for each person!
+This Node.js command-line application uses MYSQL and Inquirer to help you manage a company's employee database!
 
-When the application is started, you'll be prompted to enter a name, employee ID, email and office number for the team manager. Then be presented with the option to add an enginner or an intern to build your team.
+When the application is started, you'll be presented with the option to View All, View all Employees, Managers, Departments, or Roles, Add an Employee, Department, or Role, Update a Role, and Change Manager.
 
-You'll be prompted to enter a name, ID, email, and GitHub username for each engineer. For each intern, you'll be prompted to enter a name, ID, email, and school. Once the team build is finished, an HTML is generated displaying your team!
+* The View options will display a formatted table including data specific to your choice. 
+* The Add options will prompt you to enter new data coorelating to the option you would like to add.
+* The Update and Change options will enable you to edit an existing emloyee's role or manager.
 
 
-## Contributing
+## Installation
+
+[SSH of repo]
+git@github.com:Chis517/team-profile-gen.git
+
+Clone the GitHub repo with the key above in your command line, then run npm i or npm install to download the packages to run the application.
+
+Within the db folder, change the user and password values in the connection.js file to your own credentials if required.
+
+After npm installation is complete, run mysql in the command line and enter the following:
+  * source db/db.sql
+  * source db/schema.sql
+  <!-- Only source the seeds file below for reference -->
+  * source db/seeds.sql 
+
+
+## Technologies
 
 * Inquirer package
-
-* Jest package
+* MYSQL
+* Express
+* console.table
+* JavaScript
 
 
 ## URL Link and demo
 
 * [URL of repo]
-(https://github.com/Chis517/team-profile-gen)
-
-* [SSH of repo]
-git@github.com:Chis517/team-profile-gen.git
+(https://github.com/Chis517/employee-tracker)
 
 * [URL of video demo]
-(https://watch.screencastify.com/v/FkjYQJXdRRt135nSifF5)
+()
